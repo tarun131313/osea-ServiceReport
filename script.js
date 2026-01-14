@@ -1448,30 +1448,68 @@ function generatePDF() {
         </div>
     `;
 
-    // Build the full HTML with inline styles for PDF generation
-    // (Using HTML string directly instead of DOM element to work with file:// protocol)
-    const fullHtml = `<div style="background:white;padding:20px 40px;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;font-size:11pt;line-height:1.4;color:#333;">${html}</div>`;
+    // Open print dialog with the content - most reliable method
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>OSEA Service Report</title>
+            <style>
+                @media print {
+                    body { margin: 0; padding: 20px; }
+                }
+                body {
+                    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                    font-size: 11pt;
+                    line-height: 1.4;
+                    color: #333;
+                    background: white;
+                    padding: 20px 40px;
+                }
+                .pdf-header {
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+                    border-bottom: 3px solid #d4a017;
+                    padding-bottom: 15px;
+                    margin-bottom: 20px;
+                }
+                .pdf-logo { width: 80px; height: auto; }
+                .pdf-header-text h1 { font-size: 18pt; color: #1a5276; margin: 0; }
+                .pdf-header-text p { font-size: 10pt; color: #666; margin: 5px 0 0 0; }
+                .pdf-info-table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+                .pdf-info-table td { padding: 6px 10px; border: 1px solid #ddd; font-size: 10pt; }
+                .pdf-section { margin: 15px 0; page-break-inside: avoid; }
+                .pdf-section-title { background-color: #1a5276; color: white; padding: 8px 12px; font-size: 11pt; font-weight: bold; margin: 15px 0 10px 0; }
+                .pdf-subsection { margin: 10px 0; }
+                .pdf-subsection strong { color: #1a5276; }
+                .pdf-list { margin: 5px 0 5px 20px; }
+                .pdf-list li { margin: 3px 0; }
+                .pdf-table { width: 100%; border-collapse: collapse; margin-top: 5px; }
+                .pdf-table th { background: #f5f5f5; padding: 6px 10px; border: 1px solid #ddd; text-align: left; }
+                .pdf-table td { padding: 6px 10px; border: 1px solid #ddd; }
+                .pdf-signatures { display: flex; justify-content: space-between; margin-top: 40px; page-break-inside: avoid; }
+                .pdf-signature-column { width: 45%; }
+                .sig-header { text-align: center; margin-bottom: 15px; padding-bottom: 5px; border-bottom: 2px solid #1a5276; }
+                .pdf-signature-box { text-align: center; margin-bottom: 20px; }
+                .signature-line { border-bottom: 1px solid #333; height: 35px; margin: 0 20px 5px 20px; }
+                .sig-name { font-weight: 600; margin: 0; }
+                .sig-designation { font-size: 9pt; color: #666; margin: 0; }
+                .pdf-footer { margin-top: 30px; text-align: center; font-size: 8pt; color: #888; border-top: 1px solid #ddd; padding-top: 10px; }
+            </style>
+        </head>
+        <body>
+            ${html}
+        </body>
+        </html>
+    `);
+    printWindow.document.close();
 
-    // Generate PDF
-    const opt = {
-        margin: [10, 10, 10, 10],
-        filename: `OSEA_ServiceReport_${document.getElementById('reportNo').textContent.replace(/\//g, '-') || 'Draft'}.pdf`,
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: {
-            scale: 2,
-            useCORS: true,
-            logging: false,
-            backgroundColor: '#ffffff'
-        },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+    // Wait for content to load then trigger print
+    printWindow.onload = function() {
+        printWindow.print();
     };
 
-    // Generate PDF from HTML string (works with file:// protocol)
-    html2pdf().set(opt).from(fullHtml).save().then(() => {
-        showStatus('PDF generated successfully!', 'success');
-    }).catch(err => {
-        console.error('PDF generation error:', err);
-        showStatus('Error generating PDF: ' + err.message, 'error');
-    });
+    showStatus('Print dialog opened - Save as PDF from there', 'success');
 }
