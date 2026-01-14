@@ -1,0 +1,80 @@
+{
+  "reportNo": "OSEA-26/01/13/183953",
+  "reportDate": "2026-01-13",
+  "companyName": "ABC",
+  "city": "Noida",
+  "state": "Uttar Pradesh",
+  "contactTitle": "Mr.",
+  "contactPerson": "ak",
+  "contactInfo": "100",
+  "visitTypes": [
+    "Troubleshooting"
+  ],
+  "engineers": [
+    {
+      "title": "Mr.",
+      "name": "s"
+    },
+    {
+      "title": "Mr.",
+      "name": "t"
+    }
+  ],
+  "arrivalDate": "2025-11-17",
+  "departureDate": "2025-11-19",
+  "generalRecommendations": "",
+  "machines": [
+    {
+      "name": "Machine Name/Type",
+      "serialNumber": "1111111",
+      "make": "Make",
+      "model": "Model",
+      "year": "2008",
+      "problemReported": "Problem Reported by Client",
+      "observations": [
+        "Observations",
+        "Observations",
+        "Observations"
+      ],
+      "activities": [
+        "Activities Performed",
+        "Activities Performed"
+      ],
+      "conclusions": [
+        "Conclusions",
+        "Conclusions"
+      ],
+      "statusOperational": true,
+      "statusPartial": false,
+      "statusDown": false,
+      "statusNotes": "Status Notes",
+      "pendingActions": [
+        {
+          "action": "Action Required",
+          "responsibility": "Client",
+          "targetDate": ""
+        }
+      ],
+      "parts": [
+        {
+          "description": "Parts/Materials Required",
+          "qty": "99",
+          "remarks": "Remarks"
+        },
+        {
+          "description": "Parts/Materials Required",
+          "qty": "1",
+          "remarks": "Remarks"
+        }
+      ]
+    }
+  ],
+  "clientReps": [
+    {
+      "title": "Mr.",
+      "name": "AK",
+      "designation": "GM"
+    }
+  ],
+  "timestamp": "2026-01-13T13:12:48.145Z"
+}

@@ -1,0 +1,120 @@
+{
+  "reportNo": "OSEA-26/01/13/200446",
+  "reportDate": "2025-11-19",
+  "companyName": "Prakash pipes limited",
+  "city": "Kashipur",
+  "state": "Uttarakhand",
+  "contactTitle": "Mr.",
+  "contactPerson": "A.K Sinha",
+  "contactInfo": "9991113330",
+  "visitTypes": [
+    "Troubleshooting"
+  ],
+  "engineers": [],
+  "arrivalDate": "2025-11-17",
+  "departureDate": "2025-11-19",
+  "generalRecommendations": "",
+  "machines": [
+    {
+      "name": "ECL Machine-1 Uflex",
+      "serialNumber": "1111111",
+      "make": "Uflex",
+      "model": "000",
+      "year": "2008",
+      "problemReported": "Overheating in Extruder Part",
+      "observations": [
+        "Wiring of heaters and thermocouples was not found in Good condition."
+      ],
+      "activities": [
+        "The thermocouples of both barrel were placed properly as much as possible."
+      ],
+      "conclusions": [
+        "The wiring and Thermocouple need to be replaced.",
+        "The heaters which will be faulty will need to be replaced with new.",
+        "Machine need to be kept neat and tidy whenever possible."
+      ],
+      "statusOperational": true,
+      "statusPartial": false,
+      "statusDown": false,
+      "statusNotes": "None",
+      "pendingActions": [
+        {
+          "action": "Clean the Extruder",
+          "responsibility": "Client",
+          "targetDate": "2025-11-30"
+        }
+      ],
+      "parts": [
+        {
+          "description": "Thermocouple",
+          "qty": "5",
+          "remarks": "Procure"
+        }
+      ]
+    },
+    {
+      "name": "ECL Machine-3 Huilong",
+      "serialNumber": "22222",
+      "make": "Huilong",
+      "model": "7777",
+      "year": "2010",
+      "problemReported": "Mica Patches at higher speed, improper drying, not able to run machine at higher speed.",
+      "observations": [
+        "The coating Roller bearings and shaft was found damage.",
+        "Complete seizure of Doctor Blade assembly was found.",
+        "Play in gear and shaft of Rubber roller."
+      ],
+      "activities": [
+        "Bearing of Coating Cylinder Changed.",
+        "Doctor blade applied on Coating Cylinder.",
+        "Rubber roller gear was removed due to damage of gear teeth."
+      ],
+      "conclusions": [
+        "The Bearing shaft of Coating Cylinder was not Properly rectified by the vendor, need to get it repaired or new coating roller need to be replaced.",
+        "New gear of Coating cylinder and rubber roller need to be Fixed.",
+        "Doctor blade assembly and tray need to be maintained properly and need to be cleaned once in 10 days."
+      ],
+      "statusOperational": false,
+      "statusPartial": true,
+      "statusDown": false,
+      "statusNotes": "",
+      "pendingActions": [
+        {
+          "action": "Change bearing",
+          "responsibility": "Client",
+          "targetDate": ""
+        },
+        {
+          "action": "Clean regularly",
+          "responsibility": "Client",
+          "targetDate": ""
+        }
+      ],
+      "parts": [
+        {
+          "description": "Doctor blade",
+          "qty": "2",
+          "remarks": ""
+        },
+        {
+          "description": "Coating cylinder",
+          "qty": "1",
+          "remarks": ""
+        },
+        {
+          "description": "Bearing",
+          "qty": "2",
+          "remarks": ""
+        }
+      ]
+    }
+  ],
+  "clientReps": [
+    {
+      "title": "Mr.",
+      "name": "A.K Sinha",
+      "designation": "GM"
+    }
+  ],
+  "timestamp": "2026-01-13T14:43:45.856Z"
+}
