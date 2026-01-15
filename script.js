@@ -73,7 +73,14 @@ document.addEventListener('DOMContentLoaded', function() {
  * Shows modal on first visit or if permission not yet granted
  */
 function initLocationPermission() {
-    // Check if we already have permission (from previous session)
+    // FIRST: Check localStorage - if we've granted before, trust it
+    const savedPermission = localStorage.getItem('oseaLocationPermission');
+    if (savedPermission === 'granted') {
+        locationPermissionGranted = true;
+        return; // Don't show modal
+    }
+
+    // THEN: Check Permissions API if available
     if (navigator.permissions && navigator.permissions.query) {
         navigator.permissions.query({ name: 'geolocation' }).then(function(result) {
             if (result.state === 'granted') {
@@ -97,12 +104,13 @@ function initLocationPermission() {
                 }
             };
         }).catch(function() {
-            // Permissions API not supported, check localStorage
-            checkLocationFallback();
+            // Permissions API not supported, show modal
+            showLocationModal();
         });
     } else {
         // Permissions API not supported (older browsers, iOS Safari)
-        checkLocationFallback();
+        // Show modal since we don't have localStorage confirmation
+        showLocationModal();
     }
 }
 
@@ -159,12 +167,20 @@ function hideLocationModal() {
  * Show success confirmation modal after report submission
  */
 function showSuccessModal() {
+    console.log('showSuccessModal called'); // Debug
+
     // Close preview modal if open
     closePreview();
 
     const modal = document.getElementById('success-modal');
+    if (!modal) {
+        console.error('Success modal element not found!');
+        return;
+    }
+
     modal.classList.add('visible');
     document.body.style.overflow = 'hidden';
+    console.log('Success modal should be visible now'); // Debug
 
     // Auto-close after 4 seconds
     setTimeout(() => {
