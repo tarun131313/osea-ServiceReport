@@ -1920,10 +1920,10 @@ body.nav-closed {
     }
 
     .nav-toggle-btn {
-        width: 44px;
-        height: 44px;
-        top: 8px;
-        left: 8px;
+        width: 36px;
+        height: 36px;
+        top: 52px; /* Below progress bar - must match 768px breakpoint */
+        left: 10px;
     }
 
     .form-header h1 {
