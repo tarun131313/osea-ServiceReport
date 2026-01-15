@@ -167,20 +167,14 @@ function hideLocationModal() {
  * Show success confirmation modal after report submission
  */
 function showSuccessModal() {
-    console.log('showSuccessModal called'); // Debug
-
     // Close preview modal if open
     closePreview();
 
     const modal = document.getElementById('success-modal');
-    if (!modal) {
-        console.error('Success modal element not found!');
-        return;
-    }
+    if (!modal) return;
 
     modal.classList.add('visible');
     document.body.style.overflow = 'hidden';
-    console.log('Success modal should be visible now'); // Debug
 
     // Auto-close after 4 seconds
     setTimeout(() => {
