@@ -5,7 +5,154 @@
     box-sizing: border-box;
 }
 
-/* ==================== Location Permission Modal ==================== */
+/* ==================== Success Confirmation Modal ==================== */
+.success-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 3500;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.success-modal.visible {
+    display: flex;
+}
+
+.success-modal-content {
+    background: white;
+    border-radius: 16px;
+    max-width: 350px;
+    width: 100%;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: successBounceIn 0.5s ease;
+}
+
+@keyframes successBounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Animated Checkmark */
+.success-checkmark {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+}
+
+.checkmark-circle {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    animation: circleGrow 0.3s ease-out;
+}
+
+@keyframes circleGrow {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.checkmark-stem,
+.checkmark-kick {
+    position: absolute;
+    background: white;
+    border-radius: 2px;
+}
+
+.checkmark-stem {
+    width: 6px;
+    height: 30px;
+    left: 38px;
+    top: 22px;
+    transform: rotate(45deg);
+    animation: stemDraw 0.2s ease-out 0.3s both;
+}
+
+.checkmark-kick {
+    width: 6px;
+    height: 15px;
+    left: 24px;
+    top: 38px;
+    transform: rotate(-45deg);
+    animation: kickDraw 0.2s ease-out 0.4s both;
+}
+
+@keyframes stemDraw {
+    from {
+        height: 0;
+    }
+    to {
+        height: 30px;
+    }
+}
+
+@keyframes kickDraw {
+    from {
+        height: 0;
+    }
+    to {
+        height: 15px;
+    }
+}
+
+.success-modal-content h2 {
+    color: #27ae60;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+}
+
+.success-modal-content p {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 25px;
+}
+
+.success-close-btn {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    color: white;
+    border: none;
+    padding: 14px 40px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.success-close-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px rgba(39, 174, 96, 0.4);
+}
+
+.success-close-btn:active {
+    transform: translateY(0);
+}
+
+/* ==================== End Success Modal ==================== */
+
+/* ==================== Location Permission Modal ====================
 .location-modal {
     display: none;
     position: fixed;

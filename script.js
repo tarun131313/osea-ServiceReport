@@ -153,6 +153,36 @@ function hideLocationModal() {
     document.body.style.overflow = '';
 }
 
+// ==================== Success Modal Functions ====================
+
+/**
+ * Show success confirmation modal after report submission
+ */
+function showSuccessModal() {
+    // Close preview modal if open
+    closePreview();
+
+    const modal = document.getElementById('success-modal');
+    modal.classList.add('visible');
+    document.body.style.overflow = 'hidden';
+
+    // Auto-close after 4 seconds
+    setTimeout(() => {
+        closeSuccessModal();
+    }, 4000);
+}
+
+/**
+ * Close success modal and optionally reset form
+ */
+function closeSuccessModal() {
+    const modal = document.getElementById('success-modal');
+    modal.classList.remove('visible');
+    document.body.style.overflow = '';
+}
+
+// ==================== End Success Modal ====================
+
 /**
  * Request location permission when user clicks Allow button
  */
@@ -2349,7 +2379,9 @@ async function submitReportSilent() {
 
             // Clear localStorage draft on successful submit
             localStorage.removeItem('oseaReportDraft');
-            showStatus('PDF generated & report submitted!', 'success');
+
+            // Show success modal instead of just status message
+            showSuccessModal();
 
         } catch (error) {
             // Network error - save to offline queue
