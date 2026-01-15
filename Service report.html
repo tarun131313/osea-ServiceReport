@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>OSEA Service Report Form</title>
-    <link rel="stylesheet" href="styles.css?v=4">
+    <link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 
@@ -16,6 +16,34 @@
 <button id="nav-toggle-btn" class="nav-toggle-btn" title="Toggle Navigation">
     <span class="toggle-icon">☰</span>
 </button>
+
+<!-- Progress Bar -->
+<div class="progress-bar" id="progress-bar">
+    <div class="progress-step" data-section="report-details">
+        <span class="step-dot"></span>
+        <span class="step-label">Report</span>
+    </div>
+    <div class="progress-step" data-section="client-details">
+        <span class="step-dot"></span>
+        <span class="step-label">Client</span>
+    </div>
+    <div class="progress-step" data-section="visit-details">
+        <span class="step-dot"></span>
+        <span class="step-label">Visit</span>
+    </div>
+    <div class="progress-step" data-section="machines-section">
+        <span class="step-dot"></span>
+        <span class="step-label">Machines</span>
+    </div>
+    <div class="progress-step" data-section="general-recommendations">
+        <span class="step-dot"></span>
+        <span class="step-label">Notes</span>
+    </div>
+    <div class="progress-step" data-section="signatures">
+        <span class="step-dot"></span>
+        <span class="step-label">Sign</span>
+    </div>
+</div>
 
 <!-- Main Form -->
 <div class="form-container">
@@ -177,9 +205,6 @@
                 <button onclick="addMachine()">➕ Add Machine</button>
             </div>
             <div id="machines-container">
-            </div>
-            <div class="add-machine-bottom">
-                <button onclick="addMachine()">➕ Add Another Machine</button>
             </div>
         </div>
 

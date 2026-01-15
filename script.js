@@ -62,6 +62,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check and request location permission
     initLocationPermission();
 
+    // Initialize progress bar
+    initProgressBar();
+
     // Ensure page scrolls to top on load
     window.scrollTo(0, 0);
 });
@@ -190,6 +193,132 @@ function closeSuccessModal() {
     modal.classList.remove('visible');
     document.body.style.overflow = '';
 }
+
+// ==================== Progress Bar ====================
+
+/**
+ * Initialize progress bar - click to scroll, track current section
+ */
+function initProgressBar() {
+    const steps = document.querySelectorAll('.progress-step');
+
+    // Click to scroll to section
+    steps.forEach(step => {
+        step.addEventListener('click', () => {
+            const sectionId = step.dataset.section;
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // Track scroll position
+    window.addEventListener('scroll', updateProgressBar);
+    updateProgressBar(); // Initial call
+}
+
+/**
+ * Update progress bar based on scroll position
+ */
+function updateProgressBar() {
+    const sections = [
+        'report-details',
+        'client-details',
+        'visit-details',
+        'machines-section',
+        'general-recommendations',
+        'signatures'
+    ];
+
+    const steps = document.querySelectorAll('.progress-step');
+    const scrollPos = window.scrollY + 100; // Offset for progress bar height
+
+    let currentSection = sections[0];
+
+    sections.forEach(sectionId => {
+        const section = document.getElementById(sectionId);
+        if (section && section.offsetTop <= scrollPos) {
+            currentSection = sectionId;
+        }
+    });
+
+    // Update step classes
+    let passedCurrent = false;
+    steps.forEach(step => {
+        const sectionId = step.dataset.section;
+
+        step.classList.remove('active', 'completed');
+
+        if (sectionId === currentSection) {
+            step.classList.add('active');
+            passedCurrent = true;
+        } else if (!passedCurrent) {
+            step.classList.add('completed');
+        }
+    });
+}
+
+// ==================== End Progress Bar ====================
+
+// ==================== Validation Feedback ====================
+
+/**
+ * Initialize real-time validation on required fields
+ */
+function initValidation() {
+    const mobileInput = document.getElementById('contactMobile');
+    const visitType = document.getElementById('visitType');
+
+    // Mobile number validation
+    if (mobileInput) {
+        mobileInput.addEventListener('blur', () => {
+            validateMobile(mobileInput);
+        });
+        mobileInput.addEventListener('input', () => {
+            if (mobileInput.value.length === 10) {
+                mobileInput.classList.remove('invalid');
+                mobileInput.classList.add('valid');
+            } else {
+                mobileInput.classList.remove('valid');
+            }
+        });
+    }
+
+    // Visit type validation
+    if (visitType) {
+        visitType.addEventListener('change', () => {
+            if (visitType.value) {
+                visitType.classList.remove('invalid');
+                visitType.classList.add('valid');
+            }
+        });
+        visitType.addEventListener('blur', () => {
+            if (!visitType.value) {
+                visitType.classList.add('invalid');
+            }
+        });
+    }
+}
+
+/**
+ * Validate mobile number field
+ */
+function validateMobile(input) {
+    if (!input.value || input.value.length !== 10) {
+        input.classList.add('invalid');
+        input.classList.remove('valid');
+        return false;
+    }
+    input.classList.remove('invalid');
+    input.classList.add('valid');
+    return true;
+}
+
+// Initialize validation on page load
+document.addEventListener('DOMContentLoaded', initValidation);
+
+// ==================== End Validation Feedback ====================
 
 // ==================== End Success Modal ====================
 
@@ -758,6 +887,13 @@ function addMachine() {
     const container = document.getElementById('machines-container');
     const machineId = `machine-${machineCount}`;
 
+    // Show "Copy from Machine 1" button if this is not the first machine
+    const copyButton = machineCount > 1 ? `
+        <button class="copy-btn" onclick="event.stopPropagation(); copyFromMachine1('${machineId}')">
+            📋 Copy from M1
+        </button>
+    ` : '';
+
     const machineHTML = `
         <div class="machine-card" id="${machineId}">
             <div class="machine-header" onclick="toggleMachineCollapse('${machineId}')">
@@ -766,6 +902,7 @@ function addMachine() {
                     Machine ${machineCount}
                 </h3>
                 <div class="header-buttons">
+                    ${copyButton}
                     <button class="collapse-btn" onclick="event.stopPropagation(); toggleMachineCollapse('${machineId}')">
                         Collapse
                     </button>
@@ -948,6 +1085,28 @@ function removeMachine(machineId) {
         updateMachineNumbers();
         updateNavigation();
     }
+}
+
+/**
+ * Copy machine info (Make, Model, Year) from Machine 1 to target machine
+ * Does NOT copy: Serial number, Problem, Observations (unique per machine)
+ */
+function copyFromMachine1(targetMachineId) {
+    const machine1 = document.getElementById('machine-1');
+    const targetMachine = document.getElementById(targetMachineId);
+
+    if (!machine1 || !targetMachine) return;
+
+    // Copy Make, Model, Year (common fields)
+    const make = machine1.querySelector('.machine-make')?.value || '';
+    const model = machine1.querySelector('.machine-model')?.value || '';
+    const year = machine1.querySelector('.machine-year')?.value || '';
+
+    targetMachine.querySelector('.machine-make').value = make;
+    targetMachine.querySelector('.machine-model').value = model;
+    targetMachine.querySelector('.machine-year').value = year;
+
+    showStatus('Copied Make, Model, Year from Machine 1', 'success');
 }
 
 function updateMachineNumbers() {
