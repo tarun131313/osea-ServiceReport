@@ -925,6 +925,19 @@ function toggleMachineCollapse(machineId) {
     const machine = document.getElementById(machineId);
     if (machine) {
         machine.classList.toggle('collapsed');
+
+        // Update button label and icon
+        const isCollapsed = machine.classList.contains('collapsed');
+        const btn = machine.querySelector('.collapse-btn');
+        const icon = machine.querySelector('.collapse-icon');
+
+        if (btn) {
+            btn.textContent = isCollapsed ? 'Expand' : 'Collapse';
+        }
+        if (icon) {
+            icon.textContent = isCollapsed ? '▶' : '▼';
+        }
+
         updateNavigation();
     }
 }
