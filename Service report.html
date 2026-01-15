@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>OSEA Service Report Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Navigation Sidebar -->
+<div id="nav-sidebar" class="nav-sidebar">
+    <!-- Content populated by JS -->
+</div>
+<div id="nav-overlay" class="nav-overlay"></div>
+<button id="nav-toggle-btn" class="nav-toggle-btn" title="Toggle Navigation">
+    <span class="toggle-icon">☰</span>
+</button>
+
+<!-- Main Form -->
+<div class="form-container">
+    <!-- Header -->
+    <div class="form-header">
+        <img src="OSEA_logo_transparent.png" alt="OSEA Logo">
+        <h1>Service Report Form</h1>
+        <p>OmSai Engineering & Automation</p>
+    </div>
+
+    <div class="form-body">
+        <!-- Report Details -->
+        <div class="section" id="report-details">
+            <div class="section-title">Report Details</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Report Number</label>
+                    <div class="report-number-display" id="reportNo"></div>
+                </div>
+                <div class="form-group">
+                    <label>Report Date</label>
+                    <input type="date" id="reportDate">
+                </div>
+            </div>
+        </div>
+
+        <!-- Client Details -->
+        <div class="section" id="client-details">
+            <div class="section-title">Client Details</div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Company Name</label>
+                    <input type="text" id="companyName" placeholder="Enter company name">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>City</label>
+                    <input type="text" id="city" placeholder="Enter city">
+                </div>
+                <div class="form-group">
+                    <label>State</label>
+                    <select id="state">
+                        <option value="">Select State</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Odisha">Odisha</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="Uttarakhand">Uttarakhand</option>
+                        <option value="West Bengal">West Bengal</option>
+                        <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
+                        <option value="Chandigarh">Chandigarh</option>
+                        <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Jammu and Kashmir">Jammu and Kashmir</option>
+                        <option value="Ladakh">Ladakh</option>
+                        <option value="Lakshadweep">Lakshadweep</option>
+                        <option value="Puducherry">Puducherry</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Contact Person</label>
+                    <div class="input-with-title">
+                        <select id="contactTitle" class="title-select">
+                            <option value="Mr." selected>Mr.</option>
+                            <option value="Mrs.">Mrs.</option>
+                            <option value="Miss">Miss</option>
+                            <option value="Ms.">Ms.</option>
+                            <option value="Dr.">Dr.</option>
+                        </select>
+                        <input type="text" id="contactPerson" placeholder="Contact person name">
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Mobile Number <span class="required">*</span></label>
+                    <input type="tel" id="contactMobile" placeholder="10-digit mobile number"
+                           pattern="[0-9]{10}" maxlength="10" inputmode="numeric"
+                           oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                    <span class="field-hint" id="mobileHint">Enter 10-digit mobile number</span>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="contactEmail" placeholder="Email address (optional)">
+                </div>
+            </div>
+        </div>
+
+        <!-- Visit Details -->
+        <div class="section" id="visit-details">
+            <div class="section-title">Visit Details</div>
+            <div class="form-group">
+                <label>Visit Type <span class="required">*</span></label>
+                <select id="visitType">
+                    <option value="">Select Visit Type</option>
+                    <option value="Troubleshooting">Troubleshooting</option>
+                    <option value="AMC">AMC</option>
+                    <option value="Installation">Installation</option>
+                    <option value="Inspection">Inspection</option>
+                </select>
+            </div>
+            <div class="form-group" style="margin-top: 15px;">
+                <label>OSEA Representatives</label>
+                <div class="engineers-container" id="engineersContainer">
+                </div>
+                <div class="add-engineer-row">
+                    <select id="engineerTitle" class="title-select">
+                        <option value="Mr." selected>Mr.</option>
+                        <option value="Mrs.">Mrs.</option>
+                        <option value="Miss">Miss</option>
+                        <option value="Ms.">Ms.</option>
+                        <option value="Dr.">Dr.</option>
+                    </select>
+                    <input type="text" id="engineerInput" placeholder="Enter name and press Enter">
+                    <button type="button" onclick="addEngineer()">➕ Add</button>
+                </div>
+            </div>
+            <div class="form-row" style="margin-top: 15px;">
+                <div class="form-group">
+                    <label>Arrival Date</label>
+                    <input type="date" id="arrivalDate">
+                </div>
+                <div class="form-group">
+                    <label>Departure Date</label>
+                    <input type="date" id="departureDate">
+                </div>
+            </div>
+        </div>
+
+        <!-- Machines Section -->
+        <div class="section" id="machines-section">
+            <div class="section-title">
+                Machines
+                <button onclick="addMachine()">➕ Add Machine</button>
+            </div>
+            <div id="machines-container">
+            </div>
+            <div class="add-machine-bottom">
+                <button onclick="addMachine()">➕ Add Another Machine</button>
+            </div>
+        </div>
+
+        <!-- General Recommendations -->
+        <div class="section" id="general-recommendations">
+            <div class="section-title">General Recommendations</div>
+            <div class="form-group">
+                <textarea id="generalRecommendations" placeholder="Maintenance advice, operator training needs, or other recommendations..."></textarea>
+            </div>
+        </div>
+
+        <!-- Signatures -->
+        <div class="section" id="signatures">
+            <div class="section-title">Representatives & Signatures</div>
+
+            <!-- OSEA Representatives -->
+            <div class="rep-section">
+                <div class="rep-section-header">
+                    <span>OSEA Representatives</span>
+                </div>
+                <div class="rep-list" id="osea-reps">
+                    <!-- Populated by JS from engineers -->
+                </div>
+            </div>
+
+            <!-- Client Representatives -->
+            <div class="rep-section">
+                <div class="rep-section-header">
+                    <span>Client Representatives</span>
+                </div>
+                <div class="rep-list" id="client-reps">
+                    <div class="rep-item" draggable="true">
+                        <span class="drag-handle">⋮⋮</span>
+                        <select class="rep-title">
+                            <option value="Mr." selected>Mr.</option>
+                            <option value="Mrs.">Mrs.</option>
+                            <option value="Miss">Miss</option>
+                            <option value="Ms.">Ms.</option>
+                            <option value="Dr.">Dr.</option>
+                        </select>
+                        <input type="text" class="rep-name" placeholder="Name">
+                        <input type="text" class="rep-designation" placeholder="Designation">
+                        <button class="add-rep-btn-inline" onclick="addClientRep(this)">+</button>
+                        <button class="remove-rep-btn" onclick="removeRep(this)">×</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generate Section -->
+    <div class="generate-section">
+        <div class="main-buttons">
+            <button class="preview-btn" onclick="previewPDF()">👁️ Preview & Generate PDF</button>
+        </div>
+        <div class="status-msg" id="statusMsg"></div>
+        <input type="file" id="draftFileInput" accept=".json" style="display: none;" onchange="loadDraftFromFile(this)">
+    </div>
+</div>
+
+<!-- Location Permission Modal -->
+<div id="location-modal" class="location-modal">
+    <div class="location-modal-content">
+        <div class="location-modal-icon">📍</div>
+        <h2>Location Access Required</h2>
+        <p>To verify report authenticity and maintain audit records, we need your location when submitting reports.</p>
+        <ul class="location-benefits">
+            <li>Confirms report was submitted from client site</li>
+            <li>Creates tamper-proof audit trail</li>
+            <li>Location is stored securely with each report</li>
+        </ul>
+        <button id="allowLocationBtn" class="allow-location-btn">Allow Location Access</button>
+        <p class="location-note">You'll see a browser prompt after clicking. Please tap "Allow".</p>
+    </div>
+</div>
+
+<!-- Preview Modal -->
+<div id="preview-modal" class="preview-modal">
+    <div class="preview-modal-content">
+        <div class="preview-modal-header">
+            <h2>Report Preview</h2>
+            <div class="preview-modal-actions">
+                <button class="preview-edit-btn" onclick="closePreview()">✏️ Edit</button>
+                <button class="preview-pdf-btn" onclick="generatePDFFromPreview()">📄 Generate PDF</button>
+                <button class="preview-close-btn" onclick="closePreview()">✕</button>
+            </div>
+        </div>
+        <div class="preview-modal-body" id="preview-content">
+            <!-- Preview content will be inserted here -->
+        </div>
+    </div>
+</div>
+
+<!-- PDF Output (Hidden) -->
+<div id="pdf-output">
+    <div class="pdf-container" id="pdf-content">
+    </div>
+</div>
+
+<script src="logo_data.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
