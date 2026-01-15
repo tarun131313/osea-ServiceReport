@@ -881,6 +881,40 @@ body.nav-closed {
     background: #2980b9;
 }
 
+/* Copy dropdown for multiple machines */
+.copy-select {
+    background: #3498db;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+/* Add Machine button at bottom */
+.add-machine-bottom {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.add-machine-btn {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.add-machine-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+}
+
 .machine-body {
     padding: 15px;
     background: #fafafa;

@@ -887,12 +887,30 @@ function addMachine() {
     const container = document.getElementById('machines-container');
     const machineId = `machine-${machineCount}`;
 
-    // Show "Copy from Machine 1" button if this is not the first machine
-    const copyButton = machineCount > 1 ? `
-        <button class="copy-btn" onclick="event.stopPropagation(); copyFromMachine1('${machineId}')">
-            📋 Copy from M1
-        </button>
-    ` : '';
+    // Build copy element based on number of existing machines
+    let copyElement = '';
+    const existingMachines = document.querySelectorAll('.machine-card').length;
+
+    if (existingMachines === 1) {
+        // Only 1 machine exists - simple button
+        copyElement = `
+            <button class="copy-btn" onclick="event.stopPropagation(); copyFromMachine('${machineId}', 'machine-1')">
+                📋 Copy from M1
+            </button>
+        `;
+    } else if (existingMachines >= 2) {
+        // 2+ machines exist - dropdown to select which one
+        let options = '';
+        for (let i = 1; i <= existingMachines; i++) {
+            options += `<option value="machine-${i}">M${i}</option>`;
+        }
+        copyElement = `
+            <select class="copy-select" onclick="event.stopPropagation();" onchange="copyFromMachine('${machineId}', this.value); this.selectedIndex=0;">
+                <option value="">📋 Copy from...</option>
+                ${options}
+            </select>
+        `;
+    }
 
     const machineHTML = `
         <div class="machine-card" id="${machineId}">
@@ -902,7 +920,7 @@ function addMachine() {
                     Machine ${machineCount}
                 </h3>
                 <div class="header-buttons">
-                    ${copyButton}
+                    ${copyElement}
                     <button class="collapse-btn" onclick="event.stopPropagation(); toggleMachineCollapse('${machineId}')">
                         Collapse
                     </button>
@@ -1091,22 +1109,31 @@ function removeMachine(machineId) {
  * Copy machine info (Make, Model, Year) from Machine 1 to target machine
  * Does NOT copy: Serial number, Problem, Observations (unique per machine)
  */
-function copyFromMachine1(targetMachineId) {
-    const machine1 = document.getElementById('machine-1');
+/**
+ * Copy machine info from source machine to target machine
+ * Copies: Make, Model, Year (common fields)
+ * Does NOT copy: Serial number, Problem, Observations (unique per machine)
+ */
+function copyFromMachine(targetMachineId, sourceMachineId) {
+    if (!sourceMachineId) return;
+
+    const sourceMachine = document.getElementById(sourceMachineId);
     const targetMachine = document.getElementById(targetMachineId);
 
-    if (!machine1 || !targetMachine) return;
+    if (!sourceMachine || !targetMachine) return;
 
     // Copy Make, Model, Year (common fields)
-    const make = machine1.querySelector('.machine-make')?.value || '';
-    const model = machine1.querySelector('.machine-model')?.value || '';
-    const year = machine1.querySelector('.machine-year')?.value || '';
+    const make = sourceMachine.querySelector('.machine-make')?.value || '';
+    const model = sourceMachine.querySelector('.machine-model')?.value || '';
+    const year = sourceMachine.querySelector('.machine-year')?.value || '';
 
     targetMachine.querySelector('.machine-make').value = make;
     targetMachine.querySelector('.machine-model').value = model;
     targetMachine.querySelector('.machine-year').value = year;
 
-    showStatus('Copied Make, Model, Year from Machine 1', 'success');
+    // Extract machine number for message
+    const sourceNum = sourceMachineId.replace('machine-', '');
+    showStatus(`Copied Make, Model, Year from Machine ${sourceNum}`, 'success');
 }
 
 function updateMachineNumbers() {
